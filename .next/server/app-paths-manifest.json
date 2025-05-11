@@ -1,0 +1,7 @@
+{
+  "/api/gemini/sensitivity/route": "app/api/gemini/sensitivity/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/ai-sensitivity/page": "app/ai-sensitivity/page.js",
+  "/settings-advisor/page": "app/settings-advisor/page.js"
+}
