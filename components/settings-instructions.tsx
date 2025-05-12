@@ -18,7 +18,7 @@ export function SettingsInstructions({ settings, device }: SettingsInstructionsP
         <CardContent>
           <div className="space-y-6">
             <div className="relative h-48 sm:h-64 md:h-80 rounded-lg overflow-hidden">
-              <Image src="/bgmi-settings-screen.png" alt="BGMI Settings Screen" fill className="object-cover" />
+              <Image src="/bgmi-settings-screen.jpg" alt="BGMI Settings Screen" fill className="object-cover" />
             </div>
 
             <div className="space-y-4">
@@ -153,15 +153,15 @@ export function SettingsInstructions({ settings, device }: SettingsInstructionsP
             : device.includes("ROG Phone") || device.includes("Red Magic") || device.includes("Black Shark")
               ? "Gaming phones have additional hardware triggers that can be mapped to shooting and scoping. Configure these in your device's gaming center for a competitive advantage."
               : device.includes("Samsung Galaxy S") ||
-                  device.includes("OnePlus") ||
-                  device.includes("Xiaomi") ||
-                  device.includes("Poco F")
+                device.includes("OnePlus") ||
+                device.includes("Xiaomi") ||
+                device.includes("Poco F")
                 ? "High-end devices can handle 'Extreme' frame rate. Make sure to enable 120Hz refresh rate in your device settings for the smoothest gameplay."
                 : device.includes("Poco X") ||
-                    device.includes("Redmi Note") ||
-                    device.includes("Realme") ||
-                    device.includes("Vivo") ||
-                    device.includes("Oppo")
+                  device.includes("Redmi Note") ||
+                  device.includes("Realme") ||
+                  device.includes("Vivo") ||
+                  device.includes("Oppo")
                   ? "Mid-range devices should use 'Smooth' graphics with 'High' frame rate for the best balance of visuals and performance."
                   : "Android devices may have different gyroscope calibration. If you notice drift, recalibrate your gyroscope in device settings."}
         </AlertDescription>

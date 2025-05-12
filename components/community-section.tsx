@@ -150,10 +150,14 @@ export function CommunitySection() {
             </div>
 
             <div className="flex gap-4">
-              <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400">Join Discord</Button>
-              <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10">
-                Follow on Instagram
-              </Button>
+              <a href="https://discord.com/invite/battlegroundsmobilein" target="_blank" rel="noopener noreferrer">
+                <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400">Join Discord</Button>
+              </a>
+              <a href="https://www.instagram.com/_ronak.kumar" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10">
+                  Follow on Instagram
+                </Button>
+              </a>
             </div>
           </div>
 

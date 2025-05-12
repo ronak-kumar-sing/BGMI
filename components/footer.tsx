@@ -9,33 +9,29 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <Image src="/generic-mobile-game-logo.png" height={40} width={40} alt="BGMI Logo" />
-              <span className="font-bold text-yellow-500 text-xl tracking-wider">BGMI INDIA</span>
+              <Image src="/bgmi-logo.png" height={40} width={150} alt="BGMI Logo" />
+              {/* <span className="font-bold text-yellow-500 text-xl tracking-wider">BGMI INDIA</span> */}
             </Link>
             <p className="text-gray-400 mb-6">
               The official website for Battlegrounds Mobile India. Experience the ultimate battle royale game designed
               exclusively for Indian gamers.
             </p>
             <div className="flex gap-4">
-              <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+              <Link href="https://www.facebook.com/BattlegroundsMobileIN/" className="text-gray-400 hover:text-yellow-500 transition-colors">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+              <Link href="https://www.instagram.com/_ronak.kumar" className="text-gray-400 hover:text-yellow-500 transition-colors">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+              <Link href="https://x.com/bgmi_official?lang=bn" className="text-gray-400 hover:text-yellow-500 transition-colors">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+              <Link href="https://www.youtube.com/@BattlegroundsMobile_IN" className="text-gray-400 hover:text-yellow-500 transition-colors">
                 <Youtube className="h-5 w-5" />
                 <span className="sr-only">Youtube</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
-                <Twitch className="h-5 w-5" />
-                <span className="sr-only">Twitch</span>
               </Link>
             </div>
           </div>
@@ -80,17 +76,17 @@ export function Footer() {
             <h3 className="font-bold text-white text-lg mb-6">Community</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+                <Link href="https://discord.com/invite/battlegroundsmobilein" className="text-gray-400 hover:text-yellow-500 transition-colors">
                   Discord Server
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+                <Link href="https://www.instagram.com/_ronak.kumar" className="text-gray-400 hover:text-yellow-500 transition-colors">
                   Forums
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">
+                <Link href="https://x.com/bgmi_official?lang=bn" className="text-gray-400 hover:text-yellow-500 transition-colors">
                   Content Creators
                 </Link>
               </li>

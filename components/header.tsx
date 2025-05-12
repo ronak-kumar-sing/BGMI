@@ -17,8 +17,8 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-yellow-500/20">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/bgmi-logo.png" height={40} width={40} alt="BGMI Logo" />
-          <span className="font-bold text-yellow-500 text-xl tracking-wider">BGMI INDIA</span>
+          <Image src="/bgmi-logo.png" height={40} width={150} alt="BGMI Logo" />
+          {/* <span className="font-bold text-yellow-500 text-xl tracking-wider">BGMI INDIA</span> */}
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -65,7 +65,9 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400">Download Now</Button>
+          <Link href="https://play.google.com/store/apps/details?id=com.pubg.imobile&hl=en_IN">
+            <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400">Download Now</Button>
+          </Link>
         </nav>
 
         <div className="md:hidden flex items-center">
@@ -140,7 +142,9 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400 mt-2">Download Now</Button>
+            <Link href="https://play.google.com/store/apps/details?id=com.pubg.imobile&hl=en_IN">
+              <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400 mt-2">Download Now</Button>
+            </Link>
           </nav>
         </div>
       )}

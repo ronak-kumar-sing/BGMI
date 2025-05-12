@@ -352,46 +352,27 @@ export function SettingsAdvisor() {
 
                   <div>
                     <Label>Pro Player Configuration</Label>
-                    <div className="grid grid-cols-2 gap-4 mt-2">
-                      <div
-                        className={cn(
-                          "border rounded-lg p-4 cursor-pointer transition-all",
-                          proPlayer === "Jonathan"
-                            ? "border-yellow-500 bg-yellow-500/10"
-                            : "border-gray-700 hover:border-yellow-500/50",
-                        )}
-                        onClick={() => setProPlayer("Jonathan")}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                            <Image src="/jonathan.png" alt="Jonathan" fill className="object-cover" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium text-white">Jonathan</h3>
-                            <p className="text-xs text-gray-400">4-finger claw specialist</p>
-                          </div>
-                        </div>
+                    <div className="relative mt-4">
+                      <div className="flex flex-row flex-nowrap gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-yellow-500/60 scrollbar-track-black/30 py-2 px-1 bg-black/40 rounded-lg">
+                        {Object.entries(proPlayerSettings).map(([name, player]) => (
+                          <button
+                            type="button"
+                            key={name}
+                            className={cn(
+                              "whitespace-nowrap px-4 py-2 rounded-full border-2 font-semibold text-sm transition-all focus:outline-none",
+                              proPlayer === name
+                                ? "border-yellow-500 bg-yellow-500/20 text-yellow-300 shadow scale-105 ring-2 ring-yellow-400"
+                                : "border-gray-700 text-white hover:border-yellow-500/50 hover:text-yellow-400 hover:bg-yellow-900/10"
+                            )}
+                            onClick={() => setProPlayer(name)}
+                            tabIndex={0}
+                            aria-label={`Select pro player ${name}`}
+                          >
+                            {name}
+                          </button>
+                        ))}
                       </div>
-
-                      <div
-                        className={cn(
-                          "border rounded-lg p-4 cursor-pointer transition-all",
-                          proPlayer === "Scout"
-                            ? "border-yellow-500 bg-yellow-500/10"
-                            : "border-gray-700 hover:border-yellow-500/50",
-                        )}
-                        onClick={() => setProPlayer("Scout")}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                            <Image src="/scout.png" alt="Scout" fill className="object-cover" />
-                          </div>
-                          <div>
-                            <h3 className="font-medium text-white">Scout</h3>
-                            <p className="text-xs text-gray-400">Gyro & sniper expert</p>
-                          </div>
-                        </div>
-                      </div>
+                      <div className="text-xs text-gray-400 mt-2 text-center">Scroll or swipe to see more pro players</div>
                     </div>
                   </div>
                 </div>

@@ -51,6 +51,41 @@ export const deviceOptimizations = {
     "Use 'Processing Speed' mode in battery settings",
     "Reduce screen brightness to 70% to prevent overheating",
   ],
+  "Samsung Galaxy M34": [
+    "Enable Game Booster's 'Focus Mode'",
+    "Set display to 120Hz refresh rate",
+    "Use 'Smooth' + 'High' graphics settings",
+    "Disable Samsung Dex during gameplay",
+    "Enable 'Extra Brightness' for better visibility",
+  ],
+  "Samsung Galaxy F15": [
+    "Set refresh rate to 90Hz in display settings",
+    "Enable Game Booster's 'Priority Mode'",
+    "Use 'Smooth' + 'Medium' graphics settings",
+    "Disable Always On Display during gameplay",
+    "Enable 'Battery Protection' for long sessions",
+  ],
+  "Samsung Galaxy Z Fold 5": [
+    "Enable Flex Mode for dual-screen gameplay optimization",
+    "Set main screen refresh rate to 120Hz in display settings",
+    "Use Game Booster's 'Multi Display' performance settings",
+    "Adjust HUD layout for foldable screen aspect ratio",
+    "Disable app continuity feature during gameplay",
+  ],
+  "Samsung Galaxy Z Flip 5": [
+    "Enable 'Cover Screen Preview' for notifications",
+    "Set main display refresh rate to 120Hz",
+    "Use Flex Mode for stable angled gameplay",
+    "Disable folding gestures during matches",
+    "Optimize HUD layout for tall display ratio",
+  ],
+  "Samsung Galaxy S21 FE": [
+    "Enable Game Booster's 'Alternative Performance' mode",
+    "Set 120Hz refresh rate in display settings",
+    "Use 'Samsung DeX' mode for external display gaming",
+    "Disable Bixby voice wake-up during gameplay",
+    "Set graphics to 'Smooth' + 'Extreme' for 90 FPS",
+  ],
 
   // OnePlus devices
   OnePlus: [
@@ -88,6 +123,20 @@ export const deviceOptimizations = {
     "Close background apps before playing",
     "Set graphics to 'Smooth' + 'High' for optimal performance",
   ],
+  "OnePlus Nord CE 4": [
+    "Enable 'Pro Gamer Mode' in battery settings",
+    "Set 120Hz refresh rate in display settings",
+    "Use OxygenOS' 'RAM Expansion' disable feature",
+    "Enable HyperTouch 2.0 for better responsiveness",
+    "Set graphics to 'Smooth' + 'Extreme' for 90 FPS",
+  ],
+  "OnePlus Pad": [
+    "Enable 'Tablet Mode' optimizations in settings",
+    "Use 144Hz refresh rate in display settings",
+    "Optimize HUD layout for 7:5 aspect ratio",
+    "Enable 'Cross Device Sync' disable during gameplay",
+    "Use magnetic keyboard as cooling surface",
+  ],
 
   // Xiaomi devices
   Xiaomi: [
@@ -124,6 +173,41 @@ export const deviceOptimizations = {
     "Use 'Balanced' mode in battery settings",
     "Set graphics to 'Smooth' + 'High' for optimal performance",
     "Clear RAM before starting BGMI for smoother gameplay",
+  ],
+  "Redmi 12 5G": [
+    "Enable Game Turbo mode",
+    "Set refresh rate to 90Hz in settings",
+    "Use 'Smooth' + 'High' graphics preset",
+    "Disable MIUI optimizations temporarily",
+    "Clear cache partition before gaming sessions",
+  ],
+  "Redmi 11 Prime": [
+    "Set graphics to 'Balanced' + 'Medium'",
+    "Enable 'Memory Extension' in settings",
+    "Use cooling pad for better thermal management",
+    "Disable automatic updates during gameplay",
+    "Force stop all Google services before playing",
+  ],
+  "Xiaomi Redmi K70": [
+    "Enable 'Turbo Charging' mode for quick top-ups",
+    "Set 120Hz refresh rate in display settings",
+    "Use Game Turbo's 'AI Performance' optimization",
+    "Enable 'LiquidCool' technology in thermal settings",
+    "Set touch sampling rate to 480Hz in gaming mode",
+  ],
+  "Xiaomi Mix Fold 3": [
+    "Enable 'Dual Screen Sync' for seamless switching",
+    "Set main display refresh rate to 120Hz",
+    "Adjust HUD layout for 8:9.6 aspect ratio",
+    "Use 'Folding Mode Optimization' in Game Turbo",
+    "Disable second screen during intensive gameplay",
+  ],
+  "Xiaomi Civi 4": [
+    "Enable 'Beauty Mode' disable during gameplay",
+    "Set 120Hz refresh rate in display settings",
+    "Use Game Turbo's 'Focus Mode' optimizations",
+    "Disable AI camera features during matches",
+    "Set graphics to 'Smooth' + 'Extreme' for 90 FPS",
   ],
 
   // Poco devices
@@ -169,6 +253,27 @@ export const deviceOptimizations = {
     "Set graphics to 'Smooth' + 'Medium' for optimal performance",
     "Clear RAM before starting BGMI for smoother gameplay",
   ],
+  "Poco M6 Pro": [
+    "Enable Game Turbo mode",
+    "Set 90Hz refresh rate in display settings",
+    "Use 'Smooth' + 'High' graphics preset",
+    "Disable MIUI optimizations temporarily",
+    "Enable 'Memory Extension' for better performance",
+  ],
+  "Poco F6": [
+    "Enable 'HyperOS Gaming Mode' optimizations",
+    "Set 120Hz refresh rate in CrystalRes display settings",
+    "Use 'AI HDR Enhancement' disable for performance",
+    "Enable 'Turbo Charging' mode between matches",
+    "Set graphics to 'Smooth' + 'Extreme' for 90 FPS",
+  ],
+  "Poco X7 Ultra": [
+    "Enable 'LiquidCool 2.0' thermal management",
+    "Set 120Hz refresh rate in AMOLED display settings",
+    "Use Game Turbo's 'Memory Acceleration' feature",
+    "Disable 'AI Scene Detection' during gameplay",
+    "Set graphics to 'Smooth' + 'High' for stable FPS",
+  ],
 
   // Realme devices
   Realme: [
@@ -198,6 +303,34 @@ export const deviceOptimizations = {
     "Use 'Balanced' mode in battery settings",
     "Set graphics to 'Smooth' + 'High' for optimal performance",
     "Enable 'Game Focus Mode' to block notifications",
+  ],
+  "Realme Narzo 60 Pro": [
+    "Enable GT Mode 3.0 for better performance",
+    "Set 90Hz refresh rate in display settings",
+    "Use 'Smooth' + 'Extreme' graphics settings",
+    "Enable 'HyperTouch' for better responsiveness",
+    "Disable RAM expansion feature during gameplay",
+  ],
+  "Realme Narzo N55": [
+    "Set graphics to 'Smooth' + 'High'",
+    "Enable Game Space optimizations",
+    "Disable Dynamic RAM Expansion",
+    "Use 'Focus Mode' to block notifications",
+    "Keep brightness below 75% for thermals",
+  ],
+  "Realme GT 6T": [
+    "Enable 'GT Mode 4.0' for enhanced performance",
+    "Set 120Hz refresh rate in display settings",
+    "Use 'AI Frame Stabilizer' in game settings",
+    "Enable 'HyperTouch' for 2500Hz sampling rate",
+    "Set graphics to 'Smooth' + 'Extreme' for 120 FPS",
+  ],
+  "Realme 12 Pro+": [
+    "Enable 'Periscope Camera' disable during gameplay",
+    "Set 120Hz refresh rate in curved display settings",
+    "Use 'Rainwater Touch' mode for humid conditions",
+    "Enable 'Game Space 4.0' optimizations",
+    "Set graphics to 'Smooth' + 'High' for stable FPS",
   ],
 
   // iQOO devices
@@ -229,95 +362,26 @@ export const deviceOptimizations = {
     "Set graphics to 'Smooth' + 'High' for optimal performance",
     "Enable 'Game Focus Mode' to block notifications",
   ],
-
-  // Vivo devices
-  Vivo: [
-    "Enable Ultra Game Mode for BGMI",
-    "Use 'Performance Mode' in battery settings",
-    "Set display refresh rate to maximum available",
-    "Enable 'Game Assistant' for quick settings access",
-    "Use 'Eagle Eye View' for enhanced visibility",
+  "iQOO Z9": [
+    "Enable 'Ultra Game Mode'",
+    "Set 120Hz refresh rate in display settings",
+    "Use '4D Game Vibration' features",
+    "Set graphics to 'Smooth' + 'Extreme'",
+    "Enable 'Monster Mode' for maximum performance",
   ],
-  "Vivo X100 Pro": [
-    "Enable Ultra Game Mode for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Use 'Performance Mode' in battery settings",
-    "Enable 'Game Assistant' for quick settings access",
-    "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
+  "iQOO Neo 7 Pro": [
+    "Enable 'Dual-Mode Performance' switch",
+    "Set 120Hz refresh rate in display settings",
+    "Use 'Frame Interpolation' technology for smoother visuals",
+    "Enable 'Screen Pressure Sensing' for advanced controls",
+    "Set graphics to 'Smooth' + 'Extreme' for 90 FPS",
   ],
-  "Vivo X90 Pro": [
-    "Enable Ultra Game Mode for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Use 'Performance Mode' in battery settings",
-    "Enable 'Game Assistant' for quick settings access",
-    "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
-  ],
-  "Vivo V30 Pro": [
-    "Enable Game Mode and add BGMI as a priority app",
-    "Set refresh rate to 120Hz in display settings",
-    "Use 'Balanced' mode in battery settings",
-    "Set graphics to 'Smooth' + 'High' for optimal performance",
-    "Enable 'Game Focus Mode' to block notifications",
-  ],
-
-  // Oppo devices
-  Oppo: [
-    "Enable Game Space and add BGMI as a priority app",
-    "Use 'Performance Mode' in battery settings",
-    "Set display refresh rate to maximum available",
-    "Enable 'Game Focus Mode' to block notifications",
-    "Use 'Hyper Boost' for optimized performance",
-  ],
-  "Oppo Find X7 Ultra": [
-    "Enable Game Space and add BGMI as a priority app",
-    "Set refresh rate to 120Hz in display settings",
-    "Use 'Performance Mode' in battery settings",
-    "Enable 'Game Focus Mode' to block notifications",
-    "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
-  ],
-  "Oppo Find X6 Pro": [
-    "Enable Game Space and add BGMI as a priority app",
-    "Set refresh rate to 120Hz in display settings",
-    "Use 'Performance Mode' in battery settings",
-    "Enable 'Game Focus Mode' to block notifications",
-    "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
-  ],
-  "Oppo Reno 11 Pro": [
-    "Enable Game Space and add BGMI as a priority app",
-    "Set refresh rate to 120Hz in display settings",
-    "Use 'Balanced' mode in battery settings",
-    "Set graphics to 'Smooth' + 'High' for optimal performance",
-    "Enable 'Game Focus Mode' to block notifications",
-  ],
-
-  // Google devices
-  Google: [
-    "Enable Game Dashboard for BGMI",
-    "Use 'High Performance Mode' if available",
-    "Set display refresh rate to 90Hz/120Hz",
-    "Disable 'Adaptive Battery' for gaming sessions",
-    "Use 'Now Playing' history to disable music recognition while gaming",
-  ],
-  "Google Pixel 8 Pro": [
-    "Enable Game Dashboard for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Disable 'Adaptive Battery' for gaming sessions",
-    "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
-    "Use 'High Performance Mode' if available",
-  ],
-  "Google Pixel 8": [
-    "Enable Game Dashboard for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Disable 'Adaptive Battery' for gaming sessions",
-    "Set graphics to 'Smooth' + 'High' for optimal performance",
-    "Use 'High Performance Mode' if available",
-  ],
-  "Google Pixel 7 Pro": [
-    "Enable Game Dashboard for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Disable 'Adaptive Battery' for gaming sessions",
-    "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
-    "Use 'High Performance Mode' if available",
+  "iQOO Z7 Pro": [
+    "Enable '5G Gaming Mode' optimizations",
+    "Set 90Hz refresh rate in AMOLED display settings",
+    "Use 'Ultra Game Mode' for resource prioritization",
+    "Disable 'Smart 5G Switching' during matches",
+    "Set graphics to 'Balanced' + 'High' for thermal control",
   ],
 
   // Asus devices
@@ -349,28 +413,152 @@ export const deviceOptimizations = {
     "Set graphics to 'Smooth' + 'Extreme' for maximum FPS",
     "Enable 'Touch Sensitivity' option for faster response",
   ],
+  "Asus ROG Phone 6D": [
+    "Enable 'X Mode+ Ultra' performance setting",
+    "Set 165Hz refresh rate in AMOLED display settings",
+    "Use AeroActive Cooler 7 attachment for thermals",
+    "Configure AirTrigger 6 ultrasonic buttons",
+    "Set graphics to 'Smooth' + 'Extreme' for 144 FPS",
+  ],
+  "Asus Zenfone 11 Ultra": [
+    "Enable 'AI Performance' mode in settings",
+    "Set 144Hz refresh rate in LTPO display settings",
+    "Use 'Game Genie 5.0' overlay optimizations",
+    "Enable 'Touch Sensitivity+' mode for responsiveness",
+    "Set graphics to 'Smooth' + 'Extreme' for 120 FPS",
+  ],
 
-  // Nothing devices
-  Nothing: [
-    "Enable Gaming Mode for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Disable background processes before playing",
-    "Use 'High Performance Mode' if available",
-    "Set graphics to 'Smooth' + 'High' for optimal performance",
+  // Motorola devices
+  Motorola: [
+    "Enable 'Game Mode' (or 'Moto Gametime') for BGMI",
+    "Set refresh rate to maximum available in display settings",
+    "Use 'Performance Mode' in battery settings if available",
+    "Disable 'Adaptive Brightness' during gameplay",
+    "Clear RAM and close background apps before playing",
   ],
-  "Nothing Phone 2": [
-    "Enable Gaming Mode for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Disable background processes before playing",
-    "Use 'High Performance Mode' if available",
-    "Set graphics to 'Smooth' + 'High' for optimal performance",
+  "Motorola Edge 50 Pro": [
+    "Enable 'Moto Gametime' and add BGMI to it",
+    "Set display refresh rate to 144Hz",
+    "Use 'Performance Mode' in battery settings",
+    "Set graphics to 'Smooth' + 'Extreme' for best FPS",
+    "Disable 'Peek Display' to avoid interruptions",
   ],
-  "Nothing Phone 1": [
-    "Enable Gaming Mode for BGMI",
-    "Set refresh rate to 120Hz in display settings",
-    "Disable background processes before playing",
-    "Use 'High Performance Mode' if available",
-    "Set graphics to 'Smooth' + 'Medium' for optimal performance",
+  "Motorola Edge 40 Neo": [
+    "Enable 'Moto Gametime' for BGMI",
+    "Set display refresh rate to 144Hz",
+    "Use 'Balanced' battery mode for sustained performance",
+    "Set graphics to 'Smooth' + 'High'",
+    "Disable unnecessary notifications via Gametime settings",
+  ],
+  "Motorola G54": [
+    "Enable 'Game Time' mode",
+    "Set 120Hz refresh rate in display settings",
+    "Use 'Smooth' + 'High' graphics preset",
+    "Disable Moto Display during gameplay",
+    "Enable 'Touch Boost' in gaming settings",
+  ],
+  "Motorola G84": [
+    "Set refresh rate to 120Hz",
+    "Enable 'Performance Mode' in battery settings",
+    "Use GFX Tool for advanced optimization",
+    "Disable Dolby Atmos during matches",
+    "Clear all recent apps before launching BGMI",
+  ],
+  "Motorola Edge 40 Ultra": [
+    "Enable 'Ready For' gaming optimizations",
+    "Set 165Hz refresh rate in pOLED display settings",
+    "Use 'Touch Boost 2.0' for 360Hz sampling rate",
+    "Enable 'Performance Mode' in battery settings",
+    "Set graphics to 'Smooth' + 'Extreme' for 120 FPS",
+  ],
+  "Motorola Razr 50 Ultra": [
+    "Enable 'Flex View' mode optimizations",
+    "Set main display refresh rate to 165Hz",
+    "Adjust HUD layout for foldable aspect ratio",
+    "Disable external display preview during gameplay",
+    "Use 'Peel Mode' for stable angled positioning",
+  ],
+
+  // Indian OEMs
+  Lava: [
+    "Enable 'Performance Mode' in battery settings",
+    "Set graphics to 'Smooth' + 'Medium' for stable FPS",
+    "Disable all background app refresh",
+    "Use game booster apps like GFX Tool for optimization",
+    "Keep brightness below 70% to prevent overheating",
+  ],
+  "Lava Agni 2": [
+    "Enable 90Hz refresh rate in display settings",
+    "Use 'Game Mode' in device settings",
+    "Set graphics to 'Smooth' + 'high' for 60 FPS",
+    "Disable Dolby Atmos during gameplay",
+    "Clear RAM before starting BGMI",
+  ],
+  "Lava Blaze 5G": [
+    "Set graphics to 'balanced' + 'medium'",
+    "Enable 'Memory Cleaner' before playing",
+    "Disable auto-rotate during gameplay",
+    "Use game booster apps for better optimization",
+    "Keep device in cool environment while playing",
+  ],
+
+  Micromax: [
+    "Set graphics to lowest possible settings",
+    "Enable 'Force 4x MSAA' in developer options",
+    "Disable all animations in developer options",
+    "Use third-party game booster apps",
+    "Clear all background apps before playing",
+  ],
+  "Micromax In Note 3": [
+    "Set display refresh rate to 60Hz",
+    "Enable 'Performance Mode' in settings",
+    "Use GFX Tool to force 60 FPS",
+    "Disable all background processes",
+    "Keep battery above 20% for consistent performance",
+  ],
+
+  Tecno: [
+    "Enable 'Game Mode' in settings",
+    "Set 'Performance Mode' in battery settings",
+    "Use GFX Tool for FPS optimization",
+    "Disable memory extension features",
+    "Clear app cache regularly",
+  ],
+  "Tecno Camon 20 Pro": [
+    "Enable 120Hz refresh rate",
+    "Set graphics to 'Smooth' + 'High'",
+    "Use 'Game Mode' optimizations",
+    "Disable AI camera features during gameplay",
+    "Enable 'Touch Sampling Boost'",
+  ],
+  "Tecno Phantom V Flip": [
+    "Enable 'Performance Mode'",
+    "Set 120Hz refresh rate in display settings",
+    "Use cooling fan attachment for thermals",
+    "Disable foldable-specific features during gameplay",
+    "Set graphics to 'Smooth' + 'Extreme'",
+  ],
+
+  Infinix: [
+    "Enable XArena game mode",
+    "Set 'Ultra Game Mode' in settings",
+    "Use 'Performance Mode' battery setting",
+    "Disable Smart Panel during gameplay",
+    "Clear RAM using built-in cleaner",
+  ],
+  "Infinix Note 40 Pro": [
+    "Enable 120Hz refresh rate",
+    "Set graphics to 'Smooth' + 'Extreme'",
+    "Use 'XBoost' gaming enhancements",
+    "Disable charging animations during gameplay",
+    "Enable 'Touch Optimization' in game settings",
+  ],
+  "Infinix Hot 40i": [
+    "Set graphics to 'Balanced' + 'Medium'",
+    "Enable 'Game Mode' optimizations",
+    "Disable background network access",
+    "Use GFX Tool for FPS optimization",
+    "Keep brightness below 50% for thermals",
   ],
 
   // Generic Android

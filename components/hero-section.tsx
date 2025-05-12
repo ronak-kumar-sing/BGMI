@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -90,11 +91,18 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-b from-black via-[#1a1a1a] to-[#2a1500]"
+      className="relative min-h-screen min-w-screen flex items-center pt-20 overflow-hidden bg-gradient-to-b from-black via-[#1a1a1a] to-[#2a1500]"
     >
       {/* Background image with parallax effect */}
-      <div ref={imageRef} className="absolute inset-0 z-0">
-        <Image src="/bgmi-indian-landmarks.png" alt="BGMI India" fill priority className="object-cover opacity-40" />
+      <div ref={imageRef} className="absolute inset-0 z-0 w-full h-full">
+        <Image 
+          src="/bgmi-indian-landmarks.png" 
+          alt="BGMI India" 
+          fill 
+          priority 
+          className="object-cover object-center w-full h-full opacity-40" 
+          sizes="100vw" 
+        />
       </div>
 
       {/* Overlay gradient */}
@@ -117,9 +125,12 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Button size="lg" className="bg-yellow-500 text-brown-900 hover:bg-yellow-400 text-lg px-8">
-                Download Now
-              </Button>
+              <Link href="https://play.google.com/store/apps/details?id=com.pubg.imobile&hl=en_IN">
+                <Button size="lg" className="bg-yellow-500 text-brown-900 hover:bg-yellow-400 text-lg px-8">
+                  Download Now
+                </Button>
+              </Link>
+
               <Button
                 size="lg"
                 variant="outline"
