@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Button } from "@/components/ui/button"
@@ -84,7 +85,7 @@ export function WeaponShowcase() {
     },
     awm: {
       name: "AWM",
-      image: "/placeholder.svg?height=400&width=800&query=AWM sniper rifle 3D render",
+      image: "/awm-render.png",
       damage: 100,
       range: 100,
       stability: 70,
@@ -201,7 +202,9 @@ export function WeaponShowcase() {
                 </div>
               </div>
 
-              <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400 mt-4">Customize Weapon</Button>
+              <Link href="/gun-combo">
+                <Button className="bg-yellow-500 text-brown-900 hover:bg-yellow-400 mt-4">See Gun Combo</Button>
+              </Link>
             </div>
           </div>
         </Tabs>

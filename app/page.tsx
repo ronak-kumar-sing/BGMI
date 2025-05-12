@@ -36,7 +36,7 @@ export default function Home() {
             {/* Settings Advisor Card */}
             <div className="bg-gradient-to-br from-black/80 to-black/40 border border-yellow-500/20 rounded-xl overflow-hidden shadow-lg hover:shadow-yellow-500/5 hover:border-yellow-500/30 transition-all duration-300">
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Settings Advisor</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">Use Players Sensitivity</h3>
                 <p className="text-gray-300 mb-4">
                   Get personalized device settings recommendations based on your device specifications and gameplay
                   preferences.

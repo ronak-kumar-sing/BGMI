@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -26,21 +26,59 @@ export function SettingsAdvisor() {
   const [showResults, setShowResults] = useState(false)
   const [optimizedSettings, setOptimizedSettings] = useState<any>(null)
 
+  // Generate device options from device optimizations data
+  const deviceOptions = useMemo(() => {
+    const groupedDevices: Record<string, string[]> = {};
+
+    const manufacturers = [
+      "iPhone", "iPad", "Samsung", "OnePlus", "Xiaomi", "Redmi", "Poco",
+      "Realme", "iQOO", "Vivo", "Oppo", "Google", "Asus", "ROG", "Motorola",
+      "Lava", "Micromax", "Tecno", "Infinix", "Nothing"
+    ];
+
+    Object.keys(deviceOptimizations).forEach(device => {
+      if (device === "Android") return;
+
+      const isManufacturer = manufacturers.some(m => device === m);
+
+      if (isManufacturer) {
+        if (!groupedDevices[device]) {
+          groupedDevices[device] = [];
+        }
+      } else {
+        let manufacturer = "Other";
+        for (const m of manufacturers) {
+          if (device.includes(m)) {
+            manufacturer = m;
+            break;
+          }
+        }
+
+        if (!groupedDevices[manufacturer]) {
+          groupedDevices[manufacturer] = [];
+        }
+
+        groupedDevices[manufacturer].push(device);
+      }
+    });
+
+    return groupedDevices;
+  }, []);
+
   const handleGenerateSettings = () => {
-    // Get base settings from selected pro player
     const baseSettings = { ...proPlayerSettings[proPlayer as keyof typeof proPlayerSettings] }
 
-    // Apply device-specific optimizations
     const deviceType = getDeviceType(device)
-    const optimizations = deviceOptimizations[deviceType]
+    const optimizations = deviceOptimizations[deviceType as keyof typeof deviceOptimizations] ||
+      deviceOptimizations["Android"]
 
-    // Apply playstyle adjustments
     const adjustedSettings = applyPlaystyleAdjustments(baseSettings, playstyle, skillLevel)
 
-    // Generate final settings with optimizations
     const finalSettings = {
       ...adjustedSettings,
       optimizationTips: optimizations,
+      deviceModel: device,
+      deviceType: deviceType,
       sensitivityCode: generateSettingsCode(adjustedSettings, device),
     }
 
@@ -49,34 +87,37 @@ export function SettingsAdvisor() {
   }
 
   const getDeviceType = (deviceName: string) => {
-    if (deviceName.includes("iPhone") || deviceName.includes("iPad"))
-      return deviceName.includes("iPad") ? "iPad" : "iPhone"
-
-    // Check for specific device models first
-    for (const key in deviceOptimizations) {
-      if (deviceName === key) return key
+    if (deviceName in deviceOptimizations) {
+      return deviceName;
     }
 
-    // Then check for device brands
-    if (deviceName.includes("Samsung")) return "Samsung"
-    if (deviceName.includes("OnePlus")) return "OnePlus"
-    if (deviceName.includes("Xiaomi")) return "Xiaomi"
-    if (deviceName.includes("Poco")) return "Poco"
-    if (deviceName.includes("Realme")) return "Realme"
-    if (deviceName.includes("iQOO")) return "iQOO"
-    if (deviceName.includes("Vivo")) return "Vivo"
-    if (deviceName.includes("Oppo")) return "Oppo"
-    if (deviceName.includes("Google")) return "Google"
-    if (deviceName.includes("Asus")) return "Asus"
-    if (deviceName.includes("Nothing")) return "Nothing"
+    if (deviceName.includes("iPhone")) return "iPhone";
+    if (deviceName.includes("iPad")) return "iPad";
 
-    return "Android"
+    if (deviceName.includes("Samsung")) return "Samsung";
+    if (deviceName.includes("OnePlus")) return "OnePlus";
+    if (deviceName.includes("Xiaomi")) return "Xiaomi";
+    if (deviceName.includes("Redmi")) return "Redmi" in deviceOptimizations ? "Redmi" : "Xiaomi";
+    if (deviceName.includes("Poco")) return "Poco";
+    if (deviceName.includes("Realme")) return "Realme";
+    if (deviceName.includes("iQOO")) return "iQOO";
+    if (deviceName.includes("Vivo")) return "Vivo";
+    if (deviceName.includes("Oppo")) return "Oppo";
+    if (deviceName.includes("Google") || deviceName.includes("Pixel")) return "Google";
+    if (deviceName.includes("Asus") || deviceName.includes("ROG")) return "Asus";
+    if (deviceName.includes("Motorola")) return "Motorola";
+    if (deviceName.includes("Lava")) return "Lava";
+    if (deviceName.includes("Micromax")) return "Micromax";
+    if (deviceName.includes("Tecno")) return "Tecno";
+    if (deviceName.includes("Infinix")) return "Infinix";
+    if (deviceName.includes("Nothing")) return "Nothing";
+
+    return "Android";
   }
 
   const applyPlaystyleAdjustments = (settings: any, playstyle: string, skillLevel: string) => {
     const adjusted = { ...settings }
 
-    // Apply playstyle adjustments
     if (playstyle === "gyro-aggressive") {
       adjusted.gyroScope = "Always On"
       adjusted.gyro_4x = Number.parseInt(adjusted.gyro_4x) + 20 + "%"
@@ -95,9 +136,7 @@ export function SettingsAdvisor() {
       adjusted.ADS_8x = Number.parseInt(adjusted.ADS_8x) - 10 + "%"
     }
 
-    // Apply skill level adjustments
     if (skillLevel === "beginner") {
-      // Reduce sensitivity for beginners for better control
       Object.keys(adjusted).forEach((key) => {
         if (key.includes("ADS_") || key.includes("gyro_")) {
           const value = Number.parseInt(adjusted[key])
@@ -106,11 +145,7 @@ export function SettingsAdvisor() {
           }
         }
       })
-    } else if (skillLevel === "intermediate") {
-      // Slight adjustments for intermediate players
-      // No major changes needed
     } else if (skillLevel === "advanced") {
-      // Increase sensitivity for advanced players for faster reactions
       Object.keys(adjusted).forEach((key) => {
         if (key.includes("ADS_") || key.includes("gyro_")) {
           const value = Number.parseInt(adjusted[key])
@@ -134,15 +169,15 @@ export function SettingsAdvisor() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="flex flex-col items-center justify-center mb-8">
-        <div className="relative w-16 h-16 mb-4">
+    <div className="container mx-auto px-4 py-6 md:py-12">
+      <div className="flex flex-col items-center justify-center mb-6 md:mb-8">
+        <div className="relative w-12 h-12 md:w-16 md:h-16 mb-3 md:mb-4">
           <Image src="/bgmi-logo.png" alt="BGMI Logo" width={64} height={64} className="object-contain" />
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white text-center">
-          BGMI Settings <span className="text-yellow-500">Advisor</span>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center">
+          BGMI Settings <span className="text-yellow-500">Sani</span>
         </h1>
-        <p className="text-gray-400 mt-2 text-center max-w-2xl">
+        <p className="text-sm md:text-base text-gray-400 mt-2 text-center max-w-2xl px-4">
           Get personalized sensitivity settings based on pro-player configurations, optimized for your device and
           playstyle.
         </p>
@@ -150,184 +185,101 @@ export function SettingsAdvisor() {
 
       {!showResults ? (
         <Card className="max-w-3xl mx-auto bg-black/60 border-yellow-500/20">
-          <CardHeader>
-            <CardTitle className="text-white">Customize Your Settings</CardTitle>
-            <CardDescription>Fill in the details below to get personalized BGMI sensitivity settings</CardDescription>
+          <CardHeader className="px-4 py-4 md:px-6 md:py-6">
+            <CardTitle className="text-lg md:text-xl text-white">Customise Sensitivity, According To Players</CardTitle>
+            <CardDescription className="text-sm">Fill in the details below to get personalized BGMI sensitivity settings</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 pb-2 md:px-6">
             <Tabs defaultValue="form" className="w-full">
-              <TabsList className="grid grid-cols-3 mb-6">
+              <TabsList className="grid grid-cols-3 mb-4 md:mb-6">
                 <TabsTrigger value="form">Form Input</TabsTrigger>
                 <TabsTrigger value="screenshot" disabled>
-                  <Upload className="mr-2 h-4 w-4" />
-                  Screenshot
+                  <Upload className="mr-1 h-3 w-3 md:mr-2 md:h-4 md:w-4" />
+                  <span className="hidden xs:inline">Screenshot</span>
                 </TabsTrigger>
                 <TabsTrigger value="voice" disabled>
-                  <Mic className="mr-2 h-4 w-4" />
-                  Voice
+                  <Mic className="mr-1 h-3 w-3 md:mr-2 md:h-4 md:w-4" />
+                  <span className="hidden xs:inline">Voice</span>
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="form" className="space-y-6">
-                <div className="space-y-4">
+              <TabsContent value="form" className="space-y-4 md:space-y-6">
+                <div className="space-y-3 md:space-y-4">
                   <div>
-                    <Label htmlFor="device">Device Model</Label>
+                    <Label htmlFor="device" className="text-sm md:text-base mb-1">Device Model</Label>
                     <Select value={device} onValueChange={setDevice}>
-                      <SelectTrigger id="device" className="bg-black/40 border-yellow-500/20">
+                      <SelectTrigger id="device" className="bg-black/40 border-yellow-500/20 h-9 md:h-10 text-sm md:text-base">
                         <SelectValue placeholder="Select your device" />
                       </SelectTrigger>
-                      <SelectContent className="bg-black border-yellow-500/20 max-h-[300px]">
-                        <SelectItem value="select-header" disabled className="font-bold text-yellow-500">
-                          Apple
-                        </SelectItem>
-                        <SelectItem value="iPhone 15 Pro Max">iPhone 15 Pro Max</SelectItem>
-                        <SelectItem value="iPhone 15 Pro">iPhone 15 Pro</SelectItem>
-                        <SelectItem value="iPhone 15">iPhone 15</SelectItem>
-                        <SelectItem value="iPhone 14 Pro Max">iPhone 14 Pro Max</SelectItem>
-                        <SelectItem value="iPhone 14 Pro">iPhone 14 Pro</SelectItem>
-                        <SelectItem value="iPhone 14">iPhone 14</SelectItem>
-                        <SelectItem value="iPhone 13 Pro Max">iPhone 13 Pro Max</SelectItem>
-                        <SelectItem value="iPhone 13 Pro">iPhone 13 Pro</SelectItem>
-                        <SelectItem value="iPhone 13">iPhone 13</SelectItem>
-                        <SelectItem value="iPad Pro M2">iPad Pro M2</SelectItem>
-                        <SelectItem value="iPad Air">iPad Air</SelectItem>
+                      <SelectContent className="bg-black border-yellow-500/20 max-h-[50vh] md:max-h-[300px]">
+                        {Object.entries(deviceOptions).map(([manufacturer, devices]) => (
+                          <div key={manufacturer}>
+                            <SelectItem value={`${manufacturer}-header`} disabled className="font-bold text-yellow-500 text-xs md:text-sm">
+                              {manufacturer}
+                            </SelectItem>
 
-                        <SelectItem value="samsung-header" disabled className="font-bold text-yellow-500">
-                          Samsung
-                        </SelectItem>
-                        <SelectItem value="Samsung Galaxy S24 Ultra">Galaxy S24 Ultra</SelectItem>
-                        <SelectItem value="Samsung Galaxy S24+">Galaxy S24+</SelectItem>
-                        <SelectItem value="Samsung Galaxy S24">Galaxy S24</SelectItem>
-                        <SelectItem value="Samsung Galaxy S23 Ultra">Galaxy S23 Ultra</SelectItem>
-                        <SelectItem value="Samsung Galaxy S23+">Galaxy S23+</SelectItem>
-                        <SelectItem value="Samsung Galaxy S23">Galaxy S23</SelectItem>
-                        <SelectItem value="Samsung Galaxy S22 Ultra">Galaxy S22 Ultra</SelectItem>
-                        <SelectItem value="Samsung Galaxy S22+">Galaxy S22+</SelectItem>
-                        <SelectItem value="Samsung Galaxy S22">Galaxy S22</SelectItem>
-                        <SelectItem value="Samsung Galaxy A54">Galaxy A54</SelectItem>
-                        <SelectItem value="Samsung Galaxy A34">Galaxy A34</SelectItem>
+                            {manufacturer === "iPhone" && (
+                              <>
+                                <SelectItem value="iPhone 15 Pro Max">iPhone 15 Pro Max</SelectItem>
+                                <SelectItem value="iPhone 15 Pro">iPhone 15 Pro</SelectItem>
+                                <SelectItem value="iPhone 15">iPhone 15</SelectItem>
+                                <SelectItem value="iPhone 14 Pro Max">iPhone 14 Pro Max</SelectItem>
+                                <SelectItem value="iPhone 14 Pro">iPhone 14 Pro</SelectItem>
+                                <SelectItem value="iPhone 14">iPhone 14</SelectItem>
+                                <SelectItem value="iPhone 13 Pro Max">iPhone 13 Pro Max</SelectItem>
+                                <SelectItem value="iPhone 13 Pro">iPhone 13 Pro</SelectItem>
+                                <SelectItem value="iPhone 13">iPhone 13</SelectItem>
+                              </>
+                            )}
 
-                        <SelectItem value="oneplus-header" disabled className="font-bold text-yellow-500">
-                          OnePlus
-                        </SelectItem>
-                        <SelectItem value="OnePlus 12">OnePlus 12</SelectItem>
-                        <SelectItem value="OnePlus 11">OnePlus 11</SelectItem>
-                        <SelectItem value="OnePlus 10 Pro">OnePlus 10 Pro</SelectItem>
-                        <SelectItem value="OnePlus 10T">OnePlus 10T</SelectItem>
-                        <SelectItem value="OnePlus Nord 3">OnePlus Nord 3</SelectItem>
-                        <SelectItem value="OnePlus Nord CE 3">OnePlus Nord CE 3</SelectItem>
+                            {manufacturer === "iPad" && (
+                              <>
+                                <SelectItem value="iPad Pro M2">iPad Pro M2</SelectItem>
+                                <SelectItem value="iPad Air">iPad Air</SelectItem>
+                              </>
+                            )}
 
-                        <SelectItem value="xiaomi-header" disabled className="font-bold text-yellow-500">
-                          Xiaomi
-                        </SelectItem>
-                        <SelectItem value="Xiaomi 14 Ultra">Xiaomi 14 Ultra</SelectItem>
-                        <SelectItem value="Xiaomi 14">Xiaomi 14</SelectItem>
-                        <SelectItem value="Xiaomi 13 Pro">Xiaomi 13 Pro</SelectItem>
-                        <SelectItem value="Xiaomi 13">Xiaomi 13</SelectItem>
-                        <SelectItem value="Xiaomi 12 Pro">Xiaomi 12 Pro</SelectItem>
-                        <SelectItem value="Xiaomi 12">Xiaomi 12</SelectItem>
-                        <SelectItem value="Xiaomi Redmi Note 13 Pro+">Redmi Note 13 Pro+</SelectItem>
-                        <SelectItem value="Xiaomi Redmi Note 13 Pro">Redmi Note 13 Pro</SelectItem>
+                            {manufacturer !== "iPhone" && manufacturer !== "iPad" &&
+                              devices.map(device => {
+                                const displayName = device.replace(manufacturer, '').trim();
+                                return (
+                                  <SelectItem key={device} value={device} className="text-xs md:text-sm">
+                                    {displayName.length > 0 ? displayName : device}
+                                  </SelectItem>
+                                );
+                              })
+                            }
+                          </div>
+                        ))}
 
-                        <SelectItem value="poco-header" disabled className="font-bold text-yellow-500">
-                          Poco
+                        <SelectItem value="Android" className="mt-2 border-t border-gray-800 pt-2 text-xs md:text-sm">
+                          Android (Generic)
                         </SelectItem>
-                        <SelectItem value="Poco F5 Pro">Poco F5 Pro</SelectItem>
-                        <SelectItem value="Poco F5">Poco F5</SelectItem>
-                        <SelectItem value="Poco F4 GT">Poco F4 GT</SelectItem>
-                        <SelectItem value="Poco F4">Poco F4</SelectItem>
-                        <SelectItem value="Poco X6 Pro">Poco X6 Pro</SelectItem>
-                        <SelectItem value="Poco X6">Poco X6</SelectItem>
-                        <SelectItem value="Poco X5 Pro">Poco X5 Pro</SelectItem>
-                        <SelectItem value="Poco X5">Poco X5</SelectItem>
-
-                        <SelectItem value="realme-header" disabled className="font-bold text-yellow-500">
-                          Realme
-                        </SelectItem>
-                        <SelectItem value="Realme GT 5 Pro">Realme GT 5 Pro</SelectItem>
-                        <SelectItem value="Realme GT 5">Realme GT 5</SelectItem>
-                        <SelectItem value="Realme GT 3">Realme GT 3</SelectItem>
-                        <SelectItem value="Realme GT Neo 5">Realme GT Neo 5</SelectItem>
-                        <SelectItem value="Realme 11 Pro+">Realme 11 Pro+</SelectItem>
-                        <SelectItem value="Realme 11 Pro">Realme 11 Pro</SelectItem>
-
-                        <SelectItem value="iqoo-header" disabled className="font-bold text-yellow-500">
-                          iQOO
-                        </SelectItem>
-                        <SelectItem value="iQOO 12">iQOO 12</SelectItem>
-                        <SelectItem value="iQOO 11">iQOO 11</SelectItem>
-                        <SelectItem value="iQOO Neo 9 Pro">iQOO Neo 9 Pro</SelectItem>
-                        <SelectItem value="iQOO Neo 7">iQOO Neo 7</SelectItem>
-                        <SelectItem value="iQOO Z7">iQOO Z7</SelectItem>
-
-                        <SelectItem value="vivo-header" disabled className="font-bold text-yellow-500">
-                          Vivo
-                        </SelectItem>
-                        <SelectItem value="Vivo X100 Pro">Vivo X100 Pro</SelectItem>
-                        <SelectItem value="Vivo X100">Vivo X100</SelectItem>
-                        <SelectItem value="Vivo X90 Pro">Vivo X90 Pro</SelectItem>
-                        <SelectItem value="Vivo X90">Vivo X90</SelectItem>
-                        <SelectItem value="Vivo V30 Pro">Vivo V30 Pro</SelectItem>
-                        <SelectItem value="Vivo V30">Vivo V30</SelectItem>
-
-                        <SelectItem value="oppo-header" disabled className="font-bold text-yellow-500">
-                          Oppo
-                        </SelectItem>
-                        <SelectItem value="Oppo Find X7 Ultra">Oppo Find X7 Ultra</SelectItem>
-                        <SelectItem value="Oppo Find X7">Oppo Find X7</SelectItem>
-                        <SelectItem value="Oppo Find X6 Pro">Oppo Find X6 Pro</SelectItem>
-                        <SelectItem value="Oppo Find X6">Oppo Find X6</SelectItem>
-                        <SelectItem value="Oppo Reno 11 Pro">Oppo Reno 11 Pro</SelectItem>
-                        <SelectItem value="Oppo Reno 11">Oppo Reno 11</SelectItem>
-
-                        <SelectItem value="google-header" disabled className="font-bold text-yellow-500">
-                          Google
-                        </SelectItem>
-                        <SelectItem value="Google Pixel 8 Pro">Google Pixel 8 Pro</SelectItem>
-                        <SelectItem value="Google Pixel 8">Google Pixel 8</SelectItem>
-                        <SelectItem value="Google Pixel 7 Pro">Google Pixel 7 Pro</SelectItem>
-                        <SelectItem value="Google Pixel 7">Google Pixel 7</SelectItem>
-                        <SelectItem value="Google Pixel 7a">Google Pixel 7a</SelectItem>
-
-                        <SelectItem value="asus-header" disabled className="font-bold text-yellow-500">
-                          Asus
-                        </SelectItem>
-                        <SelectItem value="Asus ROG Phone 8 Pro">ROG Phone 8 Pro</SelectItem>
-                        <SelectItem value="Asus ROG Phone 8">ROG Phone 8</SelectItem>
-                        <SelectItem value="Asus ROG Phone 7 Ultimate">ROG Phone 7 Ultimate</SelectItem>
-                        <SelectItem value="Asus ROG Phone 7">ROG Phone 7</SelectItem>
-                        <SelectItem value="Asus Zenfone 10">Zenfone 10</SelectItem>
-
-                        <SelectItem value="nothing-header" disabled className="font-bold text-yellow-500">
-                          Nothing
-                        </SelectItem>
-                        <SelectItem value="Nothing Phone 2">Nothing Phone 2</SelectItem>
-                        <SelectItem value="Nothing Phone 1">Nothing Phone 1</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <Label htmlFor="playstyle">Playstyle</Label>
+                    <Label htmlFor="playstyle" className="text-sm md:text-base mb-1">Playstyle</Label>
                     <Select value={playstyle} onValueChange={setPlaystyle}>
-                      <SelectTrigger id="playstyle" className="bg-black/40 border-yellow-500/20">
+                      <SelectTrigger id="playstyle" className="bg-black/40 border-yellow-500/20 h-9 md:h-10 text-sm md:text-base">
                         <SelectValue placeholder="Select your playstyle" />
                       </SelectTrigger>
                       <SelectContent className="bg-black border-yellow-500/20">
-                        <SelectItem value="gyro-aggressive">Gyro - Aggressive</SelectItem>
-                        <SelectItem value="gyro-sniper">Gyro - Sniper</SelectItem>
-                        <SelectItem value="non-gyro-aggressive">Non-Gyro - Aggressive</SelectItem>
-                        <SelectItem value="non-gyro-sniper">Non-Gyro - Sniper</SelectItem>
+                        <SelectItem value="gyro-aggressive" className="text-xs md:text-sm">Gyro - Aggressive</SelectItem>
+                        <SelectItem value="gyro-sniper" className="text-xs md:text-sm">Gyro - Sniper</SelectItem>
+                        <SelectItem value="non-gyro-aggressive" className="text-xs md:text-sm">Non-Gyro - Aggressive</SelectItem>
+                        <SelectItem value="non-gyro-sniper" className="text-xs md:text-sm">Non-Gyro - Sniper</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <Label htmlFor="skill">Skill Level</Label>
-                    <RadioGroup value={skillLevel} onValueChange={setSkillLevel} className="flex space-x-4 mt-2">
+                    <Label htmlFor="skill" className="text-sm md:text-base mb-1">Skill Level</Label>
+                    <RadioGroup value={skillLevel} onValueChange={setSkillLevel} className="flex flex-wrap gap-3 sm:gap-4 mt-1 md:mt-2">
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="beginner" id="beginner" className="border-yellow-500 text-yellow-500" />
-                        <Label htmlFor="beginner" className="text-gray-300">
+                        <Label htmlFor="beginner" className="text-xs md:text-sm text-gray-300">
                           Beginner
                         </Label>
                       </div>
@@ -337,13 +289,13 @@ export function SettingsAdvisor() {
                           id="intermediate"
                           className="border-yellow-500 text-yellow-500"
                         />
-                        <Label htmlFor="intermediate" className="text-gray-300">
+                        <Label htmlFor="intermediate" className="text-xs md:text-sm text-gray-300">
                           Intermediate
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="advanced" id="advanced" className="border-yellow-500 text-yellow-500" />
-                        <Label htmlFor="advanced" className="text-gray-300">
+                        <Label htmlFor="advanced" className="text-xs md:text-sm text-gray-300">
                           Advanced
                         </Label>
                       </div>
@@ -351,15 +303,15 @@ export function SettingsAdvisor() {
                   </div>
 
                   <div>
-                    <Label>Pro Player Configuration</Label>
-                    <div className="relative mt-4">
-                      <div className="flex flex-row flex-nowrap gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-yellow-500/60 scrollbar-track-black/30 py-2 px-1 bg-black/40 rounded-lg">
+                    <Label className="text-sm md:text-base mb-1">Pro Player Configuration</Label>
+                    <div className="relative mt-2 md:mt-4">
+                      <div className="flex flex-row flex-nowrap gap-1 md:gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-yellow-500/60 scrollbar-track-black/30 py-2 px-1 bg-black/40 rounded-lg">
                         {Object.entries(proPlayerSettings).map(([name, player]) => (
                           <button
                             type="button"
                             key={name}
                             className={cn(
-                              "whitespace-nowrap px-4 py-2 rounded-full border-2 font-semibold text-sm transition-all focus:outline-none",
+                              "whitespace-nowrap px-2 py-1 md:px-4 md:py-2 rounded-full border-2 font-semibold text-xs md:text-sm transition-all focus:outline-none",
                               proPlayer === name
                                 ? "border-yellow-500 bg-yellow-500/20 text-yellow-300 shadow scale-105 ring-2 ring-yellow-400"
                                 : "border-gray-700 text-white hover:border-yellow-500/50 hover:text-yellow-400 hover:bg-yellow-900/10"
@@ -372,22 +324,22 @@ export function SettingsAdvisor() {
                           </button>
                         ))}
                       </div>
-                      <div className="text-xs text-gray-400 mt-2 text-center">Scroll or swipe to see more pro players</div>
+                      <div className="text-xs text-gray-400 mt-1 md:mt-2 text-center">Scroll to see more pro players</div>
                     </div>
                   </div>
                 </div>
               </TabsContent>
             </Tabs>
           </CardContent>
-          <CardFooter className="flex justify-between">
-            <div className="flex items-center text-xs text-gray-500">
-              <Info className="h-3 w-3 mr-1" />
+          <CardFooter className="flex flex-col sm:flex-row justify-between items-center gap-3 px-4 py-4 md:px-6 md:py-6">
+            <div className="flex items-center text-xs text-gray-500 text-center sm:text-left">
+              <Info className="h-3 w-3 mr-1 hidden sm:inline" />
               <span>All settings are based on pro player configurations</span>
             </div>
             <Button
               onClick={handleGenerateSettings}
               disabled={!device || !playstyle || !skillLevel || !proPlayer}
-              className="bg-yellow-500 text-black hover:bg-yellow-600"
+              className="bg-yellow-500 text-black hover:bg-yellow-600 w-full sm:w-auto text-sm"
             >
               Generate Settings
             </Button>
@@ -396,10 +348,10 @@ export function SettingsAdvisor() {
       ) : (
         <div className="max-w-4xl mx-auto">
           <Tabs defaultValue="settings" className="w-full">
-            <TabsList className="grid grid-cols-3 mb-6">
-              <TabsTrigger value="settings">Recommended Settings</TabsTrigger>
-              <TabsTrigger value="comparison">Comparison</TabsTrigger>
-              <TabsTrigger value="instructions">How to Apply</TabsTrigger>
+            <TabsList className="grid grid-cols-3 mb-4 md:mb-6">
+              <TabsTrigger value="settings" className="text-xs md:text-sm">Recommended</TabsTrigger>
+              <TabsTrigger value="comparison" className="text-xs md:text-sm">Comparison</TabsTrigger>
+              <TabsTrigger value="instructions" className="text-xs md:text-sm">How to Apply</TabsTrigger>
             </TabsList>
 
             <TabsContent value="settings">
@@ -424,17 +376,20 @@ export function SettingsAdvisor() {
             </TabsContent>
           </Tabs>
 
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-6 md:mt-8 flex flex-col sm:flex-row justify-center items-center gap-3 md:gap-4">
             <Button
               onClick={resetForm}
               variant="outline"
-              className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
+              className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10 w-full sm:w-auto text-sm"
             >
               Create New Settings
             </Button>
-            <Link href="/">
-              <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10">
-                <ArrowLeft className="mr-2 h-4 w-4" />
+            <Link href="/" className="w-full sm:w-auto">
+              <Button
+                variant="outline"
+                className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10 w-full text-sm"
+              >
+                <ArrowLeft className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                 Back to Home
               </Button>
             </Link>
@@ -442,7 +397,7 @@ export function SettingsAdvisor() {
         </div>
       )}
 
-      <div className="mt-12 text-center text-xs text-gray-500">
+      <div className="mt-8 md:mt-12 text-center text-xs text-gray-500 px-4">
         <p>Take 15-minute breaks every hour of gameplay. BGMI recommended for ages 16+.</p>
         <p className="mt-1">© 2025 BGMI Settings Advisor. Not affiliated with KRAFTON, Inc.</p>
       </div>

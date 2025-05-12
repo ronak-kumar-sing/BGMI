@@ -16,15 +16,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/ai-sensitivity/page": [
+    "/gun-combo/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/ai-sensitivity/page.js"
-    ],
-    "/settings-advisor/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/settings-advisor/page.js"
+      "static/chunks/app/gun-combo/page.js"
     ]
   }
 }

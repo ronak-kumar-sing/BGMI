@@ -91,17 +91,18 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen min-w-screen flex items-center pt-20 overflow-hidden bg-gradient-to-b from-black via-[#1a1a1a] to-[#2a1500]"
+      className="relative min-h-[100svh] w-full flex items-center pt-16 md:pt-20 overflow-hidden bg-gradient-to-b from-black via-[#1a1a1a] to-[#2a1500]"
     >
       {/* Background image with parallax effect */}
       <div ref={imageRef} className="absolute inset-0 z-0 w-full h-full">
-        <Image 
-          src="/bgmi-indian-landmarks.png" 
-          alt="BGMI India" 
-          fill 
-          priority 
-          className="object-cover object-center w-full h-full opacity-40" 
-          sizes="100vw" 
+        <Image
+          src="/bgmi-indian-landmarks.png"
+          alt="BGMI India"
+          fill
+          priority
+          className="object-cover object-center w-full h-full opacity-40"
+          sizes="(max-width: 768px) 100vw, 100vw"
+          quality={90}
         />
       </div>
 

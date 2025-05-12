@@ -56,14 +56,14 @@ export function TournamentSection() {
       prize: "₹25,00,000",
       date: "July 10-20, 2025",
       location: "Delhi",
-      image: "/placeholder.svg?key=kfw9w",
+      image: "/bgmi1.png",
     },
     {
       title: "Campus Champions",
       prize: "₹15,00,000",
       date: "August 5-15, 2025",
       location: "Bangalore",
-      image: "/placeholder.svg?key=k75o1",
+      image: "/bgmi2.png",
     },
   ]
 
