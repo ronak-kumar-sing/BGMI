@@ -281,28 +281,28 @@ export function AISensitivityGenerator() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-6 md:py-12">
       {/* Header */}
-      <div className="flex flex-col items-center justify-center mb-8">
-        <div className="relative w-16 h-16 mb-4">
+      <div className="flex flex-col items-center justify-center mb-6 md:mb-8">
+        <div className="relative w-14 h-14 md:w-16 md:h-16 mb-3 md:mb-4">
           <Image src="/bgmi-logo.png" alt="BGMI Logo" width={64} height={64} className="object-contain" />
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center">
           AI Sensitivity <span className="text-yellow-500">Generator</span>
         </h1>
-        <p className="text-gray-400 mt-2 text-center max-w-2xl">
+        <p className="text-gray-400 mt-2 text-center text-sm md:text-base max-w-2xl px-2">
           Get AI-optimized sensitivity settings tailored to your device, playstyle, and preferences using Gemini 2.0
           Flash.
         </p>
 
         {/* Progress bar (only show during form steps) */}
         {activeStep < 3 && (
-          <div className="w-full max-w-md mt-8">
+          <div className="w-full max-w-md mt-6 md:mt-8 px-2">
             <div className="flex justify-between mb-2">
-              <span className="text-sm text-gray-400">
+              <span className="text-xs md:text-sm text-gray-400">
                 Step {activeStep} of {totalSteps}
               </span>
-              <span className="text-sm text-gray-400">{progress}% Complete</span>
+              <span className="text-xs md:text-sm text-gray-400">{progress}% Complete</span>
             </div>
             <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
               <div
@@ -317,30 +317,30 @@ export function AISensitivityGenerator() {
       {/* Step 1: Basic Information Form */}
       {activeStep === 1 && !settings && (
         <Card className="max-w-3xl mx-auto bg-black/60 border-yellow-500/20">
-          <CardHeader>
-            <div className="flex items-center justify-between">
+          <CardHeader className="px-4 md:px-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <CardTitle className="text-white flex items-center">
-                  <Smartphone className="mr-2 h-5 w-5 text-yellow-500" />
+                <CardTitle className="text-white flex items-center text-lg md:text-xl">
+                  <Smartphone className="mr-2 h-4 w-4 md:h-5 md:w-5 text-yellow-500" />
                   Device & Playstyle Information
                 </CardTitle>
-                <CardDescription>Tell us about your device and how you play BGMI</CardDescription>
+                <CardDescription className="text-xs md:text-sm">Tell us about your device and how you play BGMI</CardDescription>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                        className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 text-xs md:text-sm h-8"
                         onClick={() => applyPreset("iPhone Pro Max - Aggressive")}
                       >
                         iPhone
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Apply iPhone Pro Max preset (Aggressive)</p>
+                      <p className="text-xs">Apply iPhone Pro Max preset (Aggressive)</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -351,14 +351,14 @@ export function AISensitivityGenerator() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                        className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 text-xs md:text-sm h-8"
                         onClick={() => applyPreset("Samsung S23 - Sniper")}
                       >
                         Samsung
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Apply Samsung S23 Ultra preset (Sniper)</p>
+                      <p className="text-xs">Apply Samsung S23 Ultra preset (Sniper)</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -369,22 +369,22 @@ export function AISensitivityGenerator() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                        className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 text-xs md:text-sm h-8"
                         onClick={() => applyPreset("Mid-range Android - Balanced")}
                       >
                         Android
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Apply mid-range Android preset (Balanced)</p>
+                      <p className="text-xs">Apply mid-range Android preset (Balanced)</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <form className="space-y-6">
+          <CardContent className="px-4 md:px-6">
+            <form className="space-y-4 md:space-y-6">
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="device" className="flex items-center">
@@ -496,7 +496,7 @@ export function AISensitivityGenerator() {
                   type="button"
                   onClick={() => setActiveStep(2)}
                   disabled={!device || !playStyle || !controlSetup || !gyroscopeUsage}
-                  className="w-full bg-yellow-500 text-black hover:bg-yellow-600"
+                  className="w-full bg-yellow-500 text-black hover:bg-yellow-600 text-sm md:text-base"
                 >
                   Continue
                   <ChevronRight className="ml-2 h-4 w-4" />
@@ -510,30 +510,30 @@ export function AISensitivityGenerator() {
       {/* Step 2: Advanced Options */}
       {activeStep === 2 && !settings && (
         <Card className="max-w-3xl mx-auto bg-black/60 border-yellow-500/20">
-          <CardHeader>
-            <div className="flex items-center justify-between">
+          <CardHeader className="px-4 md:px-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <CardTitle className="text-white flex items-center">
-                  <Cpu className="mr-2 h-5 w-5 text-yellow-500" />
+                <CardTitle className="text-white flex items-center text-lg md:text-xl">
+                  <Cpu className="mr-2 h-4 w-4 md:h-5 md:w-5 text-yellow-500" />
                   Advanced Options
                 </CardTitle>
-                <CardDescription>Provide additional details for more accurate settings (optional)</CardDescription>
+                <CardDescription className="text-xs md:text-sm">Provide additional details for more accurate settings (optional)</CardDescription>
               </div>
               <div>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
-                  className="text-yellow-500"
+                  className="text-yellow-500 text-xs md:text-sm h-8"
                 >
                   {showAdvancedOptions ? (
                     <>
-                      <ChevronUp className="h-4 w-4 mr-1" />
+                      <ChevronUp className="h-3 w-3 md:h-4 md:w-4 mr-1" />
                       Hide Advanced
                     </>
                   ) : (
                     <>
-                      <ChevronDown className="h-4 w-4 mr-1" />
+                      <ChevronDown className="h-3 w-3 md:h-4 md:w-4 mr-1" />
                       Show Advanced
                     </>
                   )}
@@ -541,8 +541,8 @@ export function AISensitivityGenerator() {
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="px-4 md:px-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="promptType" className="flex items-center">
@@ -630,29 +630,29 @@ export function AISensitivityGenerator() {
                 )}
               </div>
 
-              <div className="flex gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setActiveStep(1)}
-                  className="flex-1 border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                  className="w-full sm:flex-1 border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 text-sm md:text-base"
                 >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  <ArrowLeft className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                   Back
                 </Button>
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-yellow-500 text-black hover:bg-yellow-600"
+                  className="w-full sm:flex-1 bg-yellow-500 text-black hover:bg-yellow-600 text-sm md:text-base"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
                       Generating...
                     </>
                   ) : (
                     <>
-                      <Sparkles className="mr-2 h-4 w-4" />
+                      <Sparkles className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                       Generate Settings
                     </>
                   )}
@@ -667,18 +667,18 @@ export function AISensitivityGenerator() {
       {settings && (
         <div className="max-w-4xl mx-auto">
           <Card className="bg-black/60 border-yellow-500/20">
-            <CardHeader>
+            <CardHeader className="px-4 md:px-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                  <CardTitle className="text-white flex items-center">
-                    <Sparkles className="mr-2 h-5 w-5 text-yellow-500" />
+                  <CardTitle className="text-white flex items-center text-lg md:text-xl">
+                    <Sparkles className="mr-2 h-4 w-4 md:h-5 md:w-5 text-yellow-500" />
                     AI-Generated Sensitivity Settings
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs md:text-sm">
                     Optimized for {device} with {playStyle} playstyle
                   </CardDescription>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -687,19 +687,19 @@ export function AISensitivityGenerator() {
                           variant="outline"
                           onClick={() => copyToClipboard(JSON.stringify(settings, null, 2), "All Values")}
                           className={cn(
-                            "border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10",
+                            "border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 h-8",
                             copySuccess === "All Values" && "bg-green-500/20 border-green-500 text-green-500",
                           )}
                         >
                           {copySuccess === "All Values" ? (
-                            <CheckCircle className="h-4 w-4" />
+                            <CheckCircle className="h-3 w-3 md:h-4 md:w-4" />
                           ) : (
-                            <Copy className="h-4 w-4" />
+                            <Copy className="h-3 w-3 md:h-4 md:w-4" />
                           )}
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Copy all values</p>
+                        <p className="text-xs">Copy all values</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -713,19 +713,19 @@ export function AISensitivityGenerator() {
                             variant="outline"
                             onClick={() => copyToClipboard(settings.sensitivityCode || "", "Sensitivity Code")}
                             className={cn(
-                              "border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10",
+                              "border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 h-8",
                               copySuccess === "Sensitivity Code" && "bg-green-500/20 border-green-500 text-green-500",
                             )}
                           >
                             {copySuccess === "Sensitivity Code" ? (
-                              <CheckCircle className="h-4 w-4" />
+                              <CheckCircle className="h-3 w-3 md:h-4 md:w-4" />
                             ) : (
-                              <Copy className="h-4 w-4" />
+                              <Copy className="h-3 w-3 md:h-4 md:w-4" />
                             )}
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Copy sensitivity code</p>
+                          <p className="text-xs">Copy sensitivity code</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -738,13 +738,13 @@ export function AISensitivityGenerator() {
                           size="sm"
                           variant="outline"
                           onClick={generateSensitivityImage}
-                          className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                          className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 h-8"
                         >
-                          <Download className="h-4 w-4" />
+                          <Download className="h-3 w-3 md:h-4 md:w-4" />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Save as image</p>
+                        <p className="text-xs">Save as image</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -756,51 +756,51 @@ export function AISensitivityGenerator() {
                           size="sm"
                           variant="outline"
                           onClick={shareSettings}
-                          className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                          className="border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 h-8"
                         >
-                          <Share2 className="h-4 w-4" />
+                          <Share2 className="h-3 w-3 md:h-4 md:w-4" />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Share settings</p>
+                        <p className="text-xs">Share settings</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-2 md:px-6">
               <Tabs defaultValue="visual" className="w-full">
                 <TabsList className="grid w-full grid-cols-2 mb-4">
-                  <TabsTrigger value="visual">Visual Settings</TabsTrigger>
-                  <TabsTrigger value="explanation">Explanation</TabsTrigger>
+                  <TabsTrigger value="visual" className="text-xs md:text-sm">Visual Settings</TabsTrigger>
+                  <TabsTrigger value="explanation" className="text-xs md:text-sm">Explanation</TabsTrigger>
                 </TabsList>
                 <TabsContent value="visual" className="space-y-4">
                   {/* Sensitivity Code (if available) */}
                   {settings.sensitivityCode && (
                     <Card className="bg-gradient-to-r from-yellow-500/10 to-amber-500/5 border-yellow-500/30">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg text-yellow-500 flex items-center">
-                          <Sparkles className="mr-2 h-4 w-4" />
+                      <CardHeader className="pb-2 px-3 md:px-6">
+                        <CardTitle className="text-base md:text-lg text-yellow-500 flex items-center">
+                          <Sparkles className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                           Sensitivity Code
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <div className="flex items-center justify-between bg-black/60 p-3 rounded-md">
-                          <code className="text-white font-mono">{settings.sensitivityCode}</code>
+                      <CardContent className="px-3 md:px-6">
+                        <div className="flex items-center justify-between bg-black/60 p-2 md:p-3 rounded-md overflow-x-auto">
+                          <code className="text-white font-mono text-xs md:text-sm whitespace-nowrap pr-2">{settings.sensitivityCode}</code>
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => copyToClipboard(settings.sensitivityCode || "", "Sensitivity Code")}
                             className={cn(
-                              "border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10",
+                              "border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 flex-shrink-0 ml-2",
                               copySuccess === "Sensitivity Code" && "bg-green-500/20 border-green-500 text-green-500",
                             )}
                           >
                             {copySuccess === "Sensitivity Code" ? (
-                              <CheckCircle className="h-4 w-4" />
+                              <CheckCircle className="h-3 w-3 md:h-4 md:w-4" />
                             ) : (
-                              <Copy className="h-4 w-4" />
+                              <Copy className="h-3 w-3 md:h-4 md:w-4" />
                             )}
                           </Button>
                         </div>
@@ -814,10 +814,10 @@ export function AISensitivityGenerator() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Camera Sensitivity */}
                     <Card className="bg-black/40 border-yellow-500/20 hover:border-yellow-500/40 transition-colors">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg text-yellow-500">Camera Sensitivity</CardTitle>
+                      <CardHeader className="pb-2 px-3 md:px-6">
+                        <CardTitle className="text-base md:text-lg text-yellow-500">Camera Sensitivity</CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-3 md:px-6">
                         <div className="space-y-3">
                           <div>
                             <div className="flex justify-between items-center mb-1">
@@ -881,10 +881,10 @@ export function AISensitivityGenerator() {
 
                     {/* ADS Sensitivity */}
                     <Card className="bg-black/40 border-yellow-500/20 hover:border-yellow-500/40 transition-colors">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg text-yellow-500">ADS Sensitivity</CardTitle>
+                      <CardHeader className="pb-2 px-3 md:px-6">
+                        <CardTitle className="text-base md:text-lg text-yellow-500">ADS Sensitivity</CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="px-3 md:px-6">
                         <div className="space-y-3">
                           <div>
                             <div className="flex justify-between items-center mb-1">
@@ -942,10 +942,10 @@ export function AISensitivityGenerator() {
                     {/* Gyroscope Sensitivity (if applicable) */}
                     {settings.gyro && (
                       <Card className="bg-black/40 border-yellow-500/20 hover:border-yellow-500/40 transition-colors">
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-lg text-yellow-500">Gyroscope Sensitivity</CardTitle>
+                        <CardHeader className="pb-2 px-3 md:px-6">
+                          <CardTitle className="text-base md:text-lg text-yellow-500">Gyroscope Sensitivity</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="px-3 md:px-6">
                           <div className="space-y-3">
                             <div>
                               <div className="flex justify-between items-center mb-1">
@@ -1011,10 +1011,10 @@ export function AISensitivityGenerator() {
                     {/* Gyroscope ADS Sensitivity (if applicable) */}
                     {settings.gyroAds && (
                       <Card className="bg-black/40 border-yellow-500/20 hover:border-yellow-500/40 transition-colors">
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-lg text-yellow-500">Gyroscope ADS Sensitivity</CardTitle>
+                        <CardHeader className="pb-2 px-3 md:px-6">
+                          <CardTitle className="text-base md:text-lg text-yellow-500">Gyroscope ADS Sensitivity</CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="px-3 md:px-6">
                           <div className="space-y-3">
                             <div>
                               <div className="flex justify-between items-center mb-1">
@@ -1073,8 +1073,8 @@ export function AISensitivityGenerator() {
                 </TabsContent>
                 <TabsContent value="explanation">
                   <Card className="bg-black/40 border-yellow-500/20">
-                    <CardContent className="pt-6">
-                      <div className="prose prose-invert max-w-none">
+                    <CardContent className="pt-4 md:pt-6 px-3 md:px-6">
+                      <div className="prose prose-invert max-w-none text-sm md:text-base">
                         <div className="whitespace-pre-wrap">{result}</div>
                       </div>
                     </CardContent>
@@ -1082,18 +1082,18 @@ export function AISensitivityGenerator() {
                 </TabsContent>
               </Tabs>
             </CardContent>
-            <CardFooter className="flex flex-wrap gap-4 justify-center">
+            <CardFooter className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center px-4 md:px-6 py-4 md:py-6">
               <Button
                 onClick={resetForm}
                 variant="outline"
-                className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10"
+                className="w-full sm:w-auto border-yellow-500 text-yellow-500 hover:bg-yellow-500/10 text-sm"
               >
-                <ArrowLeft className="mr-2 h-4 w-4" />
+                <ArrowLeft className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                 Generate New Settings
               </Button>
-              <Link href="/">
-                <Button variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-500/10">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
+              <Link href="/" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full border-yellow-500 text-yellow-500 hover:bg-yellow-500/10 text-sm">
+                  <ArrowLeft className="mr-2 h-3 w-3 md:h-4 md:w-4" />
                   Back to Home
                 </Button>
               </Link>
@@ -1102,7 +1102,7 @@ export function AISensitivityGenerator() {
         </div>
       )}
 
-      <div className="mt-12 text-center text-xs text-gray-500">
+      <div className="mt-8 md:mt-12 text-center text-xs text-gray-500 px-2">
         <p>Take 15-minute breaks every hour of gameplay. BGMI recommended for ages 16+.</p>
         <p className="mt-1">© 2025 BGMI Settings Advisor. Not affiliated with KRAFTON, Inc.</p>
       </div>

@@ -11,15 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/page": [
+    "/ai-sensitivity/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/ai-sensitivity/page.js"
     ],
-    "/gun-combo/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/gun-combo/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

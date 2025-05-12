@@ -1,4 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/gun-combo/page": "app/gun-combo/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/ai-sensitivity/page": "app/ai-sensitivity/page.js"
 }
