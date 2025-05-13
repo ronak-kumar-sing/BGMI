@@ -60,9 +60,9 @@ export function FeaturesSection() {
   const features = [
     {
       icon: <MapPin className="h-8 w-8 text-yellow-500" />,
-      title: "Indian Maps",
+      title: "Icon Location",
       description:
-        "Battle across iconic Indian landmarks including Parliament House and Chhatrapati Shivaji Maharaj statue.",
+        "Discover in-game locations inspired by iconic landmarks, enhancing the immersive experience.",
     },
     {
       icon: <Users className="h-8 w-8 text-yellow-500" />,
