@@ -93,7 +93,7 @@ export function HeroSection() {
     // Add scroll event listener to pause video when scrolling up
     const handleScroll = () => {
       if (!showTrailer) return;
-      
+
       const currentScrollY = window.scrollY;
       if (currentScrollY < lastScrollY.current && iframeRef.current) {
         // User is scrolling up, pause the video
@@ -112,10 +112,10 @@ export function HeroSection() {
     // Setup YouTube API event listener
     const handleYouTubeMessage = (event: MessageEvent) => {
       if (!showTrailer) return;
-      
+
       try {
         const data = JSON.parse(event.data);
-        
+
         // If video ended (state = 0), close the trailer
         if (data.event === 'onStateChange' && data.info === 0) {
           toggleTrailer();
@@ -127,7 +127,7 @@ export function HeroSection() {
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('message', handleYouTubeMessage);
-    
+
     return () => {
       ctx.revert();
       window.removeEventListener('scroll', handleScroll);
@@ -138,14 +138,14 @@ export function HeroSection() {
   // Initialize YouTube player once iframe is loaded
   useEffect(() => {
     if (!showTrailer || !iframeRef.current) return;
-    
+
     // Send a message to initialize the iframe API
     iframeRef.current.addEventListener('load', () => {
       iframeRef.current?.contentWindow?.postMessage(
         JSON.stringify({
           event: 'listening',
           id: 'bgmi-trailer'
-        }), 
+        }),
         '*'
       );
     });
@@ -155,7 +155,7 @@ export function HeroSection() {
     if (!showTrailer) {
       // Store current scroll position
       lastScrollY.current = window.scrollY;
-      
+
       // Show trailer animations
       gsap.to([headingRef.current, contentRef.current], {
         opacity: 0,
@@ -185,8 +185,8 @@ export function HeroSection() {
       className="relative min-h-[100svh] w-full flex items-center pt-16 md:pt-20 overflow-hidden bg-gradient-to-b from-black via-[#1a1a1a] to-[#2a1500]"
     >
       {/* Background image with parallax effect */}
-      <div 
-        ref={imageRef} 
+      <div
+        ref={imageRef}
         className={`absolute inset-0 z-0 w-full h-full transition-opacity duration-700 ${showTrailer ? 'opacity-0' : ''}`}
       >
         <Image
@@ -205,22 +205,22 @@ export function HeroSection() {
 
       {/* YouTube Trailer */}
       {showTrailer && (
-        <div 
-          ref={trailerRef} 
+        <div
+          ref={trailerRef}
           className="absolute inset-0 z-30 w-full h-full"
         >
-          <iframe 
+          <iframe
             ref={iframeRef}
             id="bgmi-trailer"
-            src="https://www.youtube.com/embed/SFafi7eln9w?autoplay=1&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1&origin=http://localhost:3000&si=tdI5JrwZC7QyjqLB" 
+            src="https://www.youtube.com/embed/SFafi7eln9w?autoplay=1&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1&origin=http://localhost:3000&si=tdI5JrwZC7QyjqLB"
             className="absolute inset-0 w-full h-full"
             title="BGMI Trailer"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             frameBorder="0"
           ></iframe>
-          <Button 
-            onClick={toggleTrailer} 
+          <Button
+            onClick={toggleTrailer}
             className="absolute top-8 right-8 bg-black/50 hover:bg-black text-white rounded-full p-2 z-40"
             size="icon"
           >
